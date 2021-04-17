@@ -18,6 +18,6 @@ public class BookController {
 	})
 	@GetMapping
 	public String hello() {
-		return "Hello world from PETRIBR sistemas";
+		return "Hello world from PETRIBR sistemas...";
 	}
 }
