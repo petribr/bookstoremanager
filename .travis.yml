@@ -3,9 +3,16 @@ language: java
 sudo: false
 jdk: openjdk14
 install: true
+addons:
+  sonarcloud:
+    organization: $SONAR_ORGANIZATION
+    token: $SONAR_TOKEN
+script:
+  - mvn clean package sonar:sonar -P sonar
 cache:
   directories:
     - $HOME/.m2
     
-before_install:
-  - chmod +x mvnw
+# before_install:
+#  - chmod +x mvnw
+  
