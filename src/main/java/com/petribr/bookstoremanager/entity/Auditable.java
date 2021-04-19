@@ -19,7 +19,7 @@ import lombok.Setter;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class Auditable {
 	@CreatedDate
-	@Column(nullable = false)
+	@Column //(nullable = false)
 	protected LocalDateTime createdDate;
 
 	@LastModifiedDate
