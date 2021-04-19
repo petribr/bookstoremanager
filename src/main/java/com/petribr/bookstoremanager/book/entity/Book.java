@@ -8,9 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.Cascade;
-
 import com.petribr.bookstoremanager.author.entity.Author;
+import com.petribr.bookstoremanager.entity.Auditable;
 import com.petribr.bookstoremanager.publisher.entity.Publisher;
 import com.petribr.bookstoremanager.user.entity.User;
 
@@ -18,7 +17,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Book {
+public class Book extends Auditable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

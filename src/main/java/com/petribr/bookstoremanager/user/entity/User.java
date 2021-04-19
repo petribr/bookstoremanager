@@ -14,12 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.petribr.bookstoremanager.book.entity.Book;
+import com.petribr.bookstoremanager.entity.Auditable;
 
 import lombok.Data;
 
-@Entity
 @Data
-public class User {
+@Entity
+public class User extends Auditable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
