@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.petribr.bookstoremanager.author.dto.AuthorDTO;
 import com.petribr.bookstoremanager.author.entity.Author;
+import com.petribr.bookstoremanager.author.exception.AuthorAlreadyExistsException;
 import com.petribr.bookstoremanager.author.mapper.AuthorMapper;
 import com.petribr.bookstoremanager.author.repository.AuthorRepository;
-import com.petribr.bookstoremanager.exception.AuthorAlreadyExistsException;
 
 @Service
 public class AuthorService {
@@ -27,18 +27,20 @@ public class AuthorService {
 		this.authorRepository = authorRepository;
 	};
 
+	// A camada service vai sempre retornar um DTO para o nosso controlador
+	// O controlador não conhece Entidades (@Entity)
 	public AuthorDTO create(AuthorDTO authorDTO) throws AuthorAlreadyExistsException {
 		verifyIfExists(authorDTO.getName());
+		
 		Author authorToCreate = authorMapper.toModel(authorDTO);
 		Author createdAuthor = authorRepository.save(authorToCreate);
+		
 		return authorMapper.toDTO(createdAuthor);
 	}
 
-	private void verifyIfExists(String authorName) throws AuthorAlreadyExistsException {
-		Optional<Author> duplicatedAuthor = authorRepository.findByName(authorName);
-		if (duplicatedAuthor.isPresent()) {
-			throw new AuthorAlreadyExistsException(authorName);
-		}
+	private void verifyIfExists(String authorName) {
+		authorRepository.findByName(authorName)
+        .ifPresent(author -> {throw new AuthorAlreadyExistsException(authorName);});
 	}
 
 	public List<AuthorDTO> getAuthors() {

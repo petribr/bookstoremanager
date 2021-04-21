@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.petribr.bookstoremanager.author.dto.AuthorDTO;
 import com.petribr.bookstoremanager.author.service.AuthorService;
-import com.petribr.bookstoremanager.exception.AuthorAlreadyExistsException;
 
 import lombok.AllArgsConstructor;
 
@@ -26,10 +25,14 @@ import lombok.AllArgsConstructor;
 public class AuthorController implements AuthorControllerDocs {
 	private final AuthorService authorService;
 
+	//Pode ter regras de interface e tratamento de dados dessa integração
+	// toda a conversa com a parte externa da api
+	// regras de negócio não (como aquele objeto se comporta no seu domínio)
+	
 	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public AuthorDTO create(@RequestBody @Valid AuthorDTO authorDTO) throws AuthorAlreadyExistsException {
+	public AuthorDTO create(@RequestBody @Valid AuthorDTO authorDTO) {
 		return authorService.create(authorDTO);
 	}
 

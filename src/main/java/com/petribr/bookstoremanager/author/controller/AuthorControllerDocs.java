@@ -1,7 +1,6 @@
 package com.petribr.bookstoremanager.author.controller;
 
 import com.petribr.bookstoremanager.author.dto.AuthorDTO;
-import com.petribr.bookstoremanager.exception.AuthorAlreadyExistsException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,5 +15,5 @@ public interface AuthorControllerDocs {
             @ApiResponse(code = 201, message = "Success author creation"),
             @ApiResponse(code = 400, message = "Missing required fileds, wrong field range value or author already registered on system")
     })
-    AuthorDTO create(AuthorDTO authorDTO) throws AuthorAlreadyExistsException;
+    AuthorDTO create(AuthorDTO authorDTO);
 }
