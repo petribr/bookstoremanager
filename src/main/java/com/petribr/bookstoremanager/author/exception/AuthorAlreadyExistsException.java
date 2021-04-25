@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class AuthorAlreadyExistsException extends EntityExistsException {
 
+	// EntityExistsException já tratada no "BookstoreExpectionHandler"
     public AuthorAlreadyExistsException(String name) {
         super(String.format("User with name %s already exists!", name));
     }
