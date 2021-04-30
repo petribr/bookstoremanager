@@ -1,8 +1,6 @@
 package com.petribr.bookstoremanager.author.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ import com.petribr.bookstoremanager.author.repository.AuthorRepository;
 @Service
 public class AuthorService {
 
-	private final static AuthorMapper authorMapper = AuthorMapper.INSTANCE;
+	private static final AuthorMapper authorMapper = AuthorMapper.INSTANCE;
 
 	private AuthorRepository authorRepository;
 
@@ -27,7 +25,7 @@ public class AuthorService {
 	@Autowired
 	public AuthorService(AuthorRepository authorRepository) {
 		this.authorRepository = authorRepository;
-	};
+	}
 
 	// A camada service vai sempre retornar um DTO para o nosso controlador
 	// O controlador não conhece Entidades (@Entity)
@@ -35,7 +33,7 @@ public class AuthorService {
 		verifyIfExists(authorDTO.getName());
 		
 		Author authorToCreate = authorMapper.toModel(authorDTO);
-		Author createdAuthor = authorRepository.save(authorToCreate);
+		var createdAuthor = authorRepository.save(authorToCreate);
 		
 		return authorMapper.toDTO(createdAuthor);
 	}
@@ -47,9 +45,8 @@ public class AuthorService {
 	}
 
 	private Author verifyAndGetAuthor(Long id) {
-		Author foundAuthor = authorRepository.findById(id)
+		return authorRepository.findById(id)
 			.orElseThrow(() -> new AuthorNotFoundExcpetion(id));
-		return foundAuthor;
 	}
 	
 	public List<AuthorDTO> findAll() {

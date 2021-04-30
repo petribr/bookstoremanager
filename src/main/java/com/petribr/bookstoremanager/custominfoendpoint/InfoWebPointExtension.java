@@ -18,7 +18,7 @@ public class InfoWebPointExtension {
 	private InfoEndpoint delegate;
 	
 	@ReadOperation
-	public WebEndpointResponse<Map> info() {
+	public WebEndpointResponse<Map<String, Object>> info() {
 		Map<String, Object> info = this.delegate.info();
 		Integer status = getstatus(info);
 		Map<String, Object> customInfo = new HashMap<>(info);

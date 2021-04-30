@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.petribr.bookstoremanager.book.entity.Book;
 import com.petribr.bookstoremanager.entity.Auditable;
@@ -17,6 +18,7 @@ import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "Authores")
 public class Author extends Auditable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

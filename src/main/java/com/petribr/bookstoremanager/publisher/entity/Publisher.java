@@ -26,8 +26,8 @@ public class Publisher extends Auditable {
 	@Column(nullable = false, unique = true)
 	private String name;
 	
-	@Column(nullable = false, unique = true, length = 100)
-	private int code;	
+	@Column(nullable = false, unique = true, length = 50)
+	private String code;	
 	
 	@Column(nullable = false, columnDefinition = "TIMESTAMP")
 	private LocalDate foundationDate;	

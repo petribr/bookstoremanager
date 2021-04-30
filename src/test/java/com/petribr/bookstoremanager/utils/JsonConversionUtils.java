@@ -5,16 +5,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.petribr.bookstoremanager.author.dto.AuthorDTO;
+import com.petribr.bookstoremanager.publisher.dto.PublisherDTO;
 
 public class JsonConversionUtils {
-	public static String asJsonString(AuthorDTO expectedCreatedAuthorDTO) {
+	public static String asJsonString(Object expectedCreatedObjectDTO) {
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
 			objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 			objectMapper.registerModules(new JavaTimeModule());
 
-			return objectMapper.writeValueAsString(expectedCreatedAuthorDTO);
+			return objectMapper.writeValueAsString(expectedCreatedObjectDTO);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
