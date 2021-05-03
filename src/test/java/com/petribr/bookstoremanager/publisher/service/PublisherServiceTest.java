@@ -28,6 +28,7 @@ import com.petribr.bookstoremanager.publisher.builder.PublisherDTOBuilder;
 import com.petribr.bookstoremanager.publisher.dto.PublisherDTO;
 import com.petribr.bookstoremanager.publisher.entity.Publisher;
 import com.petribr.bookstoremanager.publisher.exception.PublisherAlreadyExistsException;
+import com.petribr.bookstoremanager.publisher.exception.PublisherNotFoundException;
 import com.petribr.bookstoremanager.publisher.mapper.PublisherMapper;
 import com.petribr.bookstoremanager.publisher.repository.PublisherRepository;
 

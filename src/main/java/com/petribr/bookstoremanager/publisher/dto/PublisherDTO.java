@@ -26,6 +26,7 @@ public class PublisherDTO {
 	private String name;
 	
 	@NotNull
+	@NotEmpty
 	@Size(max = 50)
 	private String code;	
 	

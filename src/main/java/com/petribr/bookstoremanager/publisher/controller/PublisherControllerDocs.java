@@ -1,4 +1,4 @@
-package com.petribr.bookstoremanager.publisher.controller.docs;
+package com.petribr.bookstoremanager.publisher.controller;
 
 import java.util.List;
 

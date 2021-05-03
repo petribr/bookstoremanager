@@ -1,4 +1,4 @@
-package com.petribr.bookstoremanager.publisher.service;
+package com.petribr.bookstoremanager.publisher.exception;
 
 import javax.persistence.EntityNotFoundException;
 

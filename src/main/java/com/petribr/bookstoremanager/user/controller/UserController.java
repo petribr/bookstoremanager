@@ -1,4 +1,4 @@
-package com.petribr.bookstoremanager.publisher.controller;
+package com.petribr.bookstoremanager.user.controller;
 
 import java.util.List;
 
@@ -15,40 +15,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.petribr.bookstoremanager.publisher.controller.PublisherControllerDocs;
-import com.petribr.bookstoremanager.publisher.dto.PublisherDTO;
-import com.petribr.bookstoremanager.publisher.service.PublisherService;
+import com.petribr.bookstoremanager.user.dto.MessageDTO;
+import com.petribr.bookstoremanager.user.dto.UserDTO;
+import com.petribr.bookstoremanager.user.service.UserService;
 
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/api/v1/publishers")
+@RequestMapping("/api/v1/users")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class PublisherController implements PublisherControllerDocs {
-	private final PublisherService publisherService;
+public class UserController implements UserControllerDocs {
+	private final UserService userService;
 
-	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public PublisherDTO create(@RequestBody @Valid PublisherDTO publisherDTO) {
-		return publisherService.create(publisherDTO);
+	public MessageDTO create(@RequestBody @Valid UserDTO userToCreateDTO) {
+		return userService.create(userToCreateDTO);
 	}
 
 	@GetMapping()
 	@ResponseStatus(HttpStatus.OK)
-	public List<PublisherDTO> findAll() {
-		return publisherService.findAll();		
+	public List<UserDTO> findAll() {
+		return userService.findAll();		
 	}
 
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public PublisherDTO findById(@PathVariable Long id) {
-		return publisherService.findById(id);
+	public UserDTO findById(@PathVariable Long id) {
+		return userService.findById(id);
 	}
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
-		publisherService.delete(id);
+		userService.delete(id);
 	}
 }
