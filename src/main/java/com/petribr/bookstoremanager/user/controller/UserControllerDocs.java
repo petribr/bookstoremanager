@@ -37,4 +37,11 @@ public interface UserControllerDocs {
 			@ApiResponse(code = 204, message = "Success User deleted"),
 			@ApiResponse(code = 404, message = "User not found error code") })
 	void delete(@PathVariable Long id);
+
+	@ApiOperation(value = "Update User by id operation")
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "Success User updated"),
+			@ApiResponse(code = 400, message = "Missing required fileds, wrong field range value or User already registered on system"), 
+			@ApiResponse(code = 404, message = "User not found error code") })
+	MessageDTO update(Long id, UserDTO userTooUpdateDTO);
 }

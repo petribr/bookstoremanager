@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -19,14 +20,18 @@ import com.petribr.bookstoremanager.user.dto.MessageDTO;
 import com.petribr.bookstoremanager.user.dto.UserDTO;
 import com.petribr.bookstoremanager.user.service.UserService;
 
-import lombok.AllArgsConstructor;
-
 @RestController
 @RequestMapping("/api/v1/users")
-@AllArgsConstructor(onConstructor = @__(@Autowired))
+//@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController implements UserControllerDocs {
 	private final UserService userService;
 
+    @Autowired
+    public UserController(UserService userService) { //, AuthenticationService authenticationService) {
+        this.userService = userService;
+        //this.authenticationService = authenticationService;
+    }
+    
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public MessageDTO create(@RequestBody @Valid UserDTO userToCreateDTO) {
@@ -49,5 +54,10 @@ public class UserController implements UserControllerDocs {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
 		userService.delete(id);
+	}
+
+	@PutMapping("/{id}")
+	public MessageDTO update(@PathVariable Long id, @RequestBody @Valid UserDTO userTooUpdateDTO) {
+		return userService.update(id, userTooUpdateDTO);
 	}
 }

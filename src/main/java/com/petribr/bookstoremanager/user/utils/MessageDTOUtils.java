@@ -13,10 +13,10 @@ public class MessageDTOUtils {
 	}
 	
 	public static MessageDTO getActionMessage(User user, String action) {
-		String createdMessage = String.format("User %s with ID %s sucessfully %s",
+		String message = String.format("User %s with ID %s sucessfully %s",
 					user.getUserName(), user.getId(), action);
 		return MessageDTO.builder()
-				.message(createdMessage)
+				.message(message)
 				.build();
 	}
 }

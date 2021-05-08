@@ -1,4 +1,4 @@
-package com.petribr.bookstoremanager.user.controller;
+package com.petribr.bookstoremanager.user.service;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -20,17 +20,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.petribr.bookstoremanager.user.dto.UserDTO;
-import com.petribr.bookstoremanager.user.entity.User;
-import com.petribr.bookstoremanager.user.exception.UserNotFoundException;
 import com.petribr.bookstoremanager.user.builder.UserDTOBuilder;
 import com.petribr.bookstoremanager.user.dto.MessageDTO;
 import com.petribr.bookstoremanager.user.dto.UserDTO;
 import com.petribr.bookstoremanager.user.entity.User;
 import com.petribr.bookstoremanager.user.exception.UserAlreadyExistsException;
+import com.petribr.bookstoremanager.user.exception.UserNotFoundException;
 import com.petribr.bookstoremanager.user.mapper.UserMapper;
 import com.petribr.bookstoremanager.user.repository.UserRepository;
-import com.petribr.bookstoremanager.user.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -111,18 +108,19 @@ public class UserServiceTest {
 	@Test
 	public void whenExistingUserIsInformedThenItShouldBeUpdated() {
 		UserDTO expectedUpdatedUserDTO = userDTOBuilder.buildUserDTO();
-		expectedUpdatedUserDTO.setName("Romulo Godoy Sarça");
+		String userName = "petester";
+		expectedUpdatedUserDTO.setUserName(userName);
 		User expectedUpdatedUser = userMapper.toModel(expectedUpdatedUserDTO);
 		
 		String expectedUpdatedMessage = String.format("User %s with ID %s sucessfully updated",
-				expectedUpdatedUserDTO.getUserName(), expectedUpdatedUserDTO.getId());
+				userName, expectedUpdatedUserDTO.getId());
 
 		when(userRepository.findById(expectedUpdatedUserDTO.getId())).thenReturn(Optional.of(expectedUpdatedUser));
 		when(userRepository.save(any(User.class))).thenReturn(expectedUpdatedUser);
 
-		MessageDTO creationMessage = userService.update(expectedUpdatedUserDTO.getId(), expectedUpdatedUserDTO);
+		MessageDTO updateMessage = userService.update(expectedUpdatedUserDTO.getId(), expectedUpdatedUserDTO);
 
-		assertThat(expectedUpdatedMessage, is(equalTo(creationMessage.getMessage())));
+		assertThat(expectedUpdatedMessage, is(equalTo(updateMessage.getMessage())));
 	}
 	
 	@Test
